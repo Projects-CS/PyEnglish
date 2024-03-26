@@ -17,6 +17,7 @@ def update_json(member_name: str, words: int):  # 写入数据
     for item in data:
         if item.value()["name"] == member_name:
             item.value()["words"] += words
+            item.value()["last_update"] = time.strftime("%Y-%m-%d")
             break
     with open('static/data.json', 'w') as file:
         json.dump(data, file)
@@ -38,6 +39,7 @@ def index():
     members = sorted(members, key=lambda x: -x["words"])  # 排序
     for member in members:  # 隐藏更新日期，保护部分隐私
         del member["last_update"]
+        del member["password"]
     print(members)  # Debug
     return flask.render_template('index.html', members=members)
 
@@ -56,6 +58,29 @@ def upload():
     # file = flask.request.files["upload"]
     # file.save("static/uploads/" + file.filename)
     # return "Upload Successfully."
+
+
+def valid_login(username: str, password: str):
+    with open('static/data.json', 'r') as file:
+        data = json.load(file)
+    members = list(data.values())  # 转列表
+    for member in members:
+        if member["name"] == username and member["password"] == password:
+            # 别忘了.value()
+            return True
+    return False
+
+
+@app.route("/login", methods=['POST', 'GET'])
+def login():
+    if flask.request.method == 'POST':
+        if valid_login(flask.request.form['username'], flask.request.form['password']):
+            return "Login Successfully"
+        else:
+            return "Error"
+            # return flask.url_for("Wrong Username/Password")
+    else:
+        return flask.render_template('login.html')
 
 
 # 按间距中的绿色按钮以运行脚本。
