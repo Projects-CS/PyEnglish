@@ -3,6 +3,7 @@ import json
 import time
 
 app = flask.Flask(__name__)
+app.secret_key = 'xf438q2ipnc42yr32iwf2eq6dr321r431'  # Needed for flash messages to work
 
 
 def update_json(member_name: str, words: int):  # 写入数据
@@ -77,8 +78,10 @@ def login():
         if valid_login(flask.request.form['username'], flask.request.form['password']):
             return "Login Successfully"
         else:
-            return "Error"
-            # return flask.url_for("Wrong Username/Password")
+            # return "Error"
+            # 这样子就能够在错误的时候重新返回登录页面，但是还不能显示错误提示。
+            flask.flash("Wrong Username/Password")
+            return flask.redirect(flask.url_for('login'))
     else:
         return flask.render_template('login.html')
 
