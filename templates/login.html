@@ -5,11 +5,13 @@
     <title>Login</title>
     <style>
         .container {
-            /*display: flex;*/
+            display: flex;
             /*justify-content: center;*/
             /*align-items: center;*/
-            max-width: 500px;
-            max-height: 400px;
+            position: relative;
+            transform: translate(0, 50%);
+            width: 500px;
+            height: 350px;
             margin: auto;
             padding: 30px;
             background-color: aliceblue;
@@ -21,7 +23,6 @@
             margin: auto;
             font-size: 28px;
             cursor: pointer;
-            padding-bottom: 20px;
         }
 
         .content {
@@ -30,6 +31,15 @@
 
         label {
             display: block;
+            margin: 10px;
+        }
+
+        #Login{
+            display: block;
+        }
+
+        #Register{
+            display: none;
         }
 
         input {
@@ -47,11 +57,16 @@
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
-            border: 4px ridge #000;
+            background-color: #00BFFF;
+            border: 4px outset #005D7C;
+            border-radius: 5px;
+            font-size: 16px;
         }
 
         button:hover {
-            border: 4px groove #fff;
+            border: 4px inset #00769D;
+            background-color: #0099CB;
+            cursor: pointer;
         }
 
         /*input[type="text"],*/
@@ -88,26 +103,56 @@
         </script>
     </div>
     <div class="content">
-        <form action="/login" method="post">
+        <form action="/login" method="post" id="Login">
             <label>
-                <input type="text" name="username" placeholder="请输入用户名" onclick="ClearContent()">
+                <input type="text" name="username" placeholder="请输入用户名" onclick="ClearContent(this)">
             </label>
-            <br>
             <label>
-                <input type="password" name="password" placeholder="请输入密码" onclick="ClearContent()">
+                <input type="password" name="password" placeholder="请输入密码" onclick="ClearContent(this)">
             </label>
-            <br>
             <label>
-                <!--            <input type="submit" value="login" placeholder="登录">-->
                 <button type="submit">登录</button>
             </label>
-            <script>
-                function ClearContent() {
-                    document.placeholder = ""
-                }
-            </script>
+            <label>
+                <button name="to_register" type="button" onclick="toggleForm()">注册</button>
+            </label>
+        </form>
+        <form action="/login" method="post" id="Register">
+            <label>
+                <input type="text" name="email" placeholder="请输入邮箱地址" onclick="ClearContent(this)">
+            </label>
+            <label>
+                <input type="text" name="username" placeholder="请输入用户名" onclick="ClearContent(this)">
+            </label>
+            <label>
+                <input type="password" name="password" placeholder="请输入密码" onclick="ClearContent(this)">
+            </label>
+            <label>
+                <button type="submit">注册</button>
+            </label>
+            <label>
+                <button name="to_login" type="button" onclick="toggleForm()">去登录</button>
+            </label>
         </form>
     </div>
+    <script>
+        function ClearContent(targetElement) {
+            targetElement.placeholder = ""
+        }
+    </script>
+    <script>
+        function toggleForm() {
+            let _Login = document.getElementById("Login");
+            let _Register = document.getElementById("Register");
+            if (_Login.style.display === "none") {
+                _Login.style.display = "block";
+                _Register.style.display = "none";
+            } else {
+                _Login.style.display = "none";
+                _Register.style.display = "block";
+            }
+        }
+    </script>
 
 </div>
 
