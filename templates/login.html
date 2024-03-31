@@ -3,19 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+        .container {
+            /*display: flex;*/
+            /*justify-content: center;*/
+            /*align-items: center;*/
+            max-width: 500px;
+            max-height: 400px;
+            margin: auto;
+            padding: 30px;
+            background-color: aliceblue;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .head {
+            margin: auto;
+            font-size: 28px;
+            cursor: pointer;
+            padding-bottom: 20px;
+        }
+
+        .content {
+            margin: auto;
+        }
+
+        label {
+            display: block;
+        }
+
+        input {
+            /*background-color: gray;*/
+            width: 100%;
+            padding: 8px;
+            /*margin: 1px;*/
+            display: inline-block;
+            border: 2px inset #ffffff;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 4px ridge #000;
+        }
+
+        button:hover {
+            border: 4px groove #fff;
+        }
+
+        /*input[type="text"],*/
+        /*input[type="password"],*/
+        /*input[type="submit"] {*/
+        /*    width: 100%;*/
+        /*    padding: 8px;*/
+        /*    margin: 6px 0;*/
+        /*    display: inline-block;*/
+        /*    border: 1px solid #ccc;*/
+        /*    border-radius: 4px;*/
+        /*    box-sizing: border-box;*/
+        /*}*/
+
+        /*input[type="submit"] {*/
+        /*    background-color: #4CAF50;*/
+        /*    color: white;*/
+        /*    cursor: pointer;*/
+        /*}*/
+
+        /*input[type="submit"]:hover {*/
+        /*    background-color: #45a049;*/
+        /*}*/
+    </style>
 </head>
 <body>
-<form action="/login" method="post">
-  <label>
-    <input type="text" name="username">
-  </label>
-  <label>
-    <input type="password" name="password">
-  </label>
-  <label>
-    <input type="submit" value="login">
-  </label>
-</form>
+<div class="container">
+    <div class="head">
+        <h2 id="homeLink" onclick="goHomePage()">登录与注册</h2>
+        <script>
+            function goHomePage() {
+                window.location.herf = '/';
+            }
+        </script>
+    </div>
+    <div class="content">
+        <form action="/login" method="post">
+            <label>
+                <input type="text" name="username" placeholder="请输入用户名" onclick="ClearContent()">
+            </label>
+            <br>
+            <label>
+                <input type="password" name="password" placeholder="请输入密码" onclick="ClearContent()">
+            </label>
+            <br>
+            <label>
+                <!--            <input type="submit" value="login" placeholder="登录">-->
+                <button type="submit">登录</button>
+            </label>
+            <script>
+                function ClearContent() {
+                    document.placeholder = ""
+                }
+            </script>
+        </form>
+    </div>
+
+</div>
+
 
 </body>
 </html>
