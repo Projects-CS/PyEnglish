@@ -42,7 +42,7 @@ def index():
         del member["last_update"]
         del member["password"]
     print(members)  # Debug
-    return flask.render_template('index.html', members=members)
+    return flask.render_template('index.html', members=members, logged_in=('username' in flask.session))
 
 
 # upload
