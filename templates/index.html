@@ -11,6 +11,11 @@
     <li>{{ member }}</li>
   {% endfor %}
 </ul>
+{% if logged_in %}
+    <p> You've logged in.</p>
+{% else %}
+    <a href="/login">Go and Login Here</a>
+{% endif %}
 
 </body>
 </html>
